@@ -20,13 +20,13 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: 
+      - run:
           name: update-npm
           command: 'sudo npm install -g npm@8.1.4'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: install-npm
+          name: install-npm-wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
