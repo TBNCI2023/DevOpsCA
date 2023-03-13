@@ -6,7 +6,7 @@ module.exports = {
         instances: "max",
         env: {
           NODE_ENV: "production",
-          PORT: 3000
+          PORT: 22
         }
       }
     ]
