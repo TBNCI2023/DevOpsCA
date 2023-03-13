@@ -25,7 +25,7 @@ cd /var/www/${APP_NAME}
 
 # Install any required dependencies
 sudo npm install
-echo $PRIVATE_KEY > CA.pem
+echo $PRIVATE_KEY > CA1.pem
 echo $SERVER > server.crt
 # Build the application
 sudo npm run build
