@@ -14,8 +14,8 @@ then
 fi
 
 docker create -p 8443:8443 --name $CONTAINER_NAME $IMAGE_NAME
-echo $PRIVATE_KEY > privatekey.pem
+echo $PRIVATE_KEY > CA1.pem
 echo $SERVER > server.crt
-docker cp ./privatekey.pem $CONTAINER_NAME:/privatekey.pem
+docker cp ./CA1.pem $CONTAINER_NAME:/CA1.pem
 docker cp ./server.crt $CONTAINER_NAME:/server.crt
 docker start $CONTAINER_NAME
