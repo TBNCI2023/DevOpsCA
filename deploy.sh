@@ -1,17 +1,28 @@
 #!/bin/bash
 
-# Navigate to the project directory
-cd ~/DevOpsCA
+# Replace with your actual application name
+APP_NAME="SimpleApplication"
 
-# Stop and remove any running Docker containers
-docker stop devopsca
-docker rm devopsca
+# Stop the application if it's already running
+if [ -f /var/run/${APP_NAME}.pid ]; then
+    kill -TERM `cat /var/run/${APP_NAME}.pid` || true
+fi
 
-# Pull the latest changes from the Git repository
-git pull
+# Remove previous build artifacts
+rm -rf /var/www/${APP_NAME}
 
-# Build a new Docker image and tag it with the latest Git commit hash
-docker build -t devopsca:latest .
+# Clone the latest version of the code from Git
+git clone https://github.com/DevOpsCA/SimpleApplication.git /var/www/${APP_NAME}
 
-# Run a new Docker container with the updated image
-docker run -d --name devopsca -p 80:3000 devopsca:latest
+# Change to the repository directory
+cd /var/www/${APP_NAME}
+
+# Install any required dependencies
+npm install
+
+# Build the application
+npm run build
+
+# Start the application
+npm start &
+echo $! > /var/run/${APP_NAME}.pid
